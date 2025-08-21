@@ -7,7 +7,7 @@ fun Array<String>.toListString(): String {
     val builder = StringBuilder()
     for (str in this) {
         if (str.length > 1) {
-            builder.append(str[0].toString().toUpperCase())
+            builder.append(str[0].uppercase())
                     .append(str.replace('-', ' ').substring(1))
                     .append("\n")
         }
@@ -37,7 +37,7 @@ fun String.toTitleString(): String {
     val pattern = Pattern.compile("\\b(\\w)")
     val matcher = pattern.matcher(name)
     while (matcher.find())
-        matcher.appendReplacement(nameBuffer, matcher.group(1)?.toUpperCase() ?: "")
+        matcher.appendReplacement(nameBuffer, matcher.group(1)?.uppercase() ?: "")
 
     return matcher.appendTail(nameBuffer).toString()
 }
