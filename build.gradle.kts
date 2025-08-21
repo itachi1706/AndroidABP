@@ -6,10 +6,9 @@ plugins {
     alias(libs.plugins.sonarqube)
 }
 
-// TODO: Update
 sonarqube {
     properties {
-        property("sonar.projectKey", "")
+        property("sonar.projectKey", "itachi1706_AndroidABP")
         property("sonar.organization", "itachi1706")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.androidLint.reportPaths", "attribouter/build/reports/lint-results-debug.xml")
