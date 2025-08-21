@@ -1,5 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
@@ -10,8 +11,9 @@ ext.set("version", "0.1.9")
 ext.set("versionCode", 18)
 
 android {
-    compileSdk = 29
-    namespace = "com.itachi1706.abp"
+    compileSdk = 36
+//    namespace = "com.itachi1706.abp"
+    namespace = "me.jfenn.attribouter"
 
     defaultConfig {
         minSdk = 16
@@ -32,6 +34,15 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     testOptions.unitTests.apply {
         isIncludeAndroidResources = true
         tasks.withType<Test>().all(KotlinClosure1<Test, Test>({
@@ -45,6 +56,12 @@ android {
                 )
             }
         }, this))
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 
