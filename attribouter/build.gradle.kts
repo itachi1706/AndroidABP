@@ -67,6 +67,7 @@ kotlin {
 dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
+    testImplementation(kotlin("test"))
 
     implementation(libs.kotlinx.coroutines.core)
 
