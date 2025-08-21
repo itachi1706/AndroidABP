@@ -93,9 +93,10 @@ open class LicenseWedge(
         websiteUrl = data.websiteUrl
 
         data.license?.id.let { id ->
+            val tid = id?.removeSuffix("+") // MODIFIED: REMOVE + SUFFIX LICENSE SUPPORT
             if (!hasAllLicense()) lifecycle?.launch {
                 withContext(Dispatchers.IO) {
-                    lifecycle?.client?.getLicense("github:$id")
+                    lifecycle?.client?.getLicense("github:$tid")
                 }?.let { onLicense(it) }
             }
         }
