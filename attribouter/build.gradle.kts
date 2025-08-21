@@ -76,6 +76,12 @@ dependencies {
     implementation(libs.androidx.browser)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.json)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.http)
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.material)
     implementation(libs.flexbox)
 
@@ -83,7 +89,4 @@ dependencies {
     annotationProcessor(libs.compiler)
 
     implementation(libs.androidutils)
-    implementation(libs.gitrest) {
-        exclude(group = "org.jetbrains.kotlinx", module = "kotlinx-serialization-runtime-common")
-    }
 }
