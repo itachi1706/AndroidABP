@@ -1,4 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -87,6 +86,4 @@ dependencies {
 
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
-
-    implementation(libs.androidutils)
 }

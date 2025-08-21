@@ -8,12 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.TooltipCompat
 import com.google.android.material.button.MaterialButton
-import me.jfenn.androidutils.getThemedColor
-import me.jfenn.androidutils.setBackgroundTint
 import me.jfenn.attribouter.R
 import me.jfenn.attribouter.utils.ResourceUtils
 import me.jfenn.attribouter.utils.UrlClickListener
 import me.jfenn.attribouter.utils.loadDrawable
+import me.jfenn.utils.getThemedColor
+import me.jfenn.utils.setBackgroundTint
 
 open class LinkWedge(
         id: String? = null,

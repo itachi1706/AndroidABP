@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import me.jfenn.androidutils.getThemedColor
 import me.jfenn.attribouter.R
 import me.jfenn.attribouter.utils.ResourceUtils
 import me.jfenn.attribouter.utils.isResourceMutable
@@ -15,6 +14,7 @@ import me.jfenn.attribouter.utils.loadDrawable
 import me.jfenn.attribouter.utils.toTitleString
 import me.jfenn.gitrest.model.ProviderString
 import me.jfenn.gitrest.model.Repo
+import me.jfenn.utils.getThemedColor
 
 open class AppWedge: Wedge<AppWedge.ViewHolder>(R.layout.attribouter_item_app_info) {
 

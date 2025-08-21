@@ -1,12 +1,16 @@
 package me.jfenn.attribouter.views
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.DashPathEffect
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.RectF
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
-import me.jfenn.androidutils.dpToPx
-import me.jfenn.androidutils.getThemedColor
 import me.jfenn.attribouter.R
+import me.jfenn.utils.dpToPx
+import me.jfenn.utils.getThemedColor
 import kotlin.math.PI
 import kotlin.math.min
 

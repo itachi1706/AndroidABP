@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import me.jfenn.androidutils.autoSystemUiColors
-import me.jfenn.androidutils.bind
 import me.jfenn.attribouter.R
 import me.jfenn.attribouter.adapters.WedgeAdapter
 import me.jfenn.attribouter.utils.ResourceUtils.getString
 import me.jfenn.attribouter.utils.getThemeAttr
 import me.jfenn.attribouter.wedges.Wedge
+import me.jfenn.utils.autoSystemUiColors
+import me.jfenn.utils.bind
 
 open class OverflowDialog(
         context: Context,

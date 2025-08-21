@@ -7,9 +7,9 @@ import android.util.AttributeSet
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.google.android.material.appbar.MaterialToolbar
-import me.jfenn.androidutils.getThemedColor
-import me.jfenn.androidutils.isColorLight
 import me.jfenn.attribouter.R
+import me.jfenn.utils.getThemedColor
+import me.jfenn.utils.isColorLight
 
 class CustomToolbar : MaterialToolbar {
 

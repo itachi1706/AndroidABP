@@ -13,9 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import me.jfenn.androidutils.bind
-import me.jfenn.androidutils.dpToPx
-import me.jfenn.androidutils.getThemedColor
 import me.jfenn.attribouter.R
 import me.jfenn.attribouter.adapters.WedgeAdapter
 import me.jfenn.attribouter.utils.ResourceUtils.getString
@@ -24,6 +21,9 @@ import me.jfenn.attribouter.utils.getThemedInt
 import me.jfenn.attribouter.utils.loadDrawable
 import me.jfenn.attribouter.wedges.ContributorWedge
 import me.jfenn.attribouter.wedges.LinkWedge
+import me.jfenn.utils.bind
+import me.jfenn.utils.dpToPx
+import me.jfenn.utils.getThemedColor
 
 
 open class UserDialog(

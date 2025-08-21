@@ -5,11 +5,11 @@ import android.os.PersistableBundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import me.jfenn.androidutils.autoSystemUiColors
-import me.jfenn.androidutils.bind
 import me.jfenn.attribouter.Attribouter
 import me.jfenn.attribouter.R
 import me.jfenn.attribouter.fragments.AboutFragment
+import me.jfenn.utils.autoSystemUiColors
+import me.jfenn.utils.bind
 
 class AboutActivity : AppCompatActivity() {
 
