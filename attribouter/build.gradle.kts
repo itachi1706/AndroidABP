@@ -16,7 +16,7 @@ android {
     namespace = "me.jfenn.attribouter"
 
     defaultConfig {
-        minSdk = 16
+        minSdk = 21
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
