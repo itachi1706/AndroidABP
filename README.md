@@ -1,3 +1,6 @@
+Note: This is a fork of the original Attribouter repository for my personal use. It is not maintained by the original author and may not receive updates or support. Use at your own risk.
+Support the original author @ https://github.com/fennifith/Attribouter
+
 <p align="center"><img alt="Attribouter" width="128px" style="width: 128px;" src="https://raw.githubusercontent.com/fennifith/Attribouter/main/.github/images/icon.png" /></p>
 <h1 align="center">Attribouter</h1>
 <p align="center">

@@ -1,0 +1,118 @@
+apply {
+    plugin 'maven-publish'
+    plugin 'signing'
+}
+
+tasks.register('androidJavadoc', Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    android.libraryVariants.all { variant ->
+        if (variant.name == 'release') {
+            owner.classpath += variant.javaCompileProvider.get().classpath
+        }
+    }
+
+    exclude '**/R.html', '**/R.*.html', '**/index.html'
+    options.encoding 'utf-8'
+    options {
+        addStringOption 'docencoding', 'utf-8'
+        addStringOption 'charset', 'utf-8'
+        links 'https://docs.oracle.com/javase/7/docs/api/'
+        links 'https://d.android.com/reference'
+        links 'https://developer.android.com/reference/androidx/'
+    }
+}
+
+tasks.register('androidJavadocJar', Jar) {
+    dependsOn androidJavadoc
+    archiveClassifier.set('javadoc')
+    from androidJavadoc.destinationDir
+
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.register('javaSourcesJar', Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+Properties localProps = new Properties()
+def localPropFile = file('../local.properties')
+if (localPropFile.canRead()) { localProps.load(new FileInputStream(localPropFile)) }
+
+afterEvaluate {
+    def mavenCentralUsername = localProps != null && localProps.containsKey('mavenCentralUsername') ? localProps.getProperty('mavenCentralUsername') : System.getenv('MAVENCENTRAL_USER')
+    def mavenCentralPassword = localProps != null && localProps.containsKey('mavenCentralPassword') ? localProps.getProperty('mavenCentralPassword') : System.getenv('MAVENCENTRAL_PASSWORD')
+
+    def ghUser = localProps != null && localProps.containsKey('gpr.user') ? localProps.getProperty('gpr.user') : System.getenv('GITHUB_ACTOR')
+    def ghKey = localProps != null && localProps.containsKey('gpr.key') ? localProps.getProperty('gpr.key') : System.getenv('GITHUB_TOKEN')
+
+    publishing {
+        repositories {
+            maven {
+                name = "sonatype"
+                def releaseRepo = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
+                def snapshotRepo = "https://central.sonatype.com/repository/maven-snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotRepo : releaseRepo
+                credentials {
+                    username = mavenCentralUsername
+                    password = mavenCentralPassword
+                }
+                // Temp: Go to https://ossrh-staging-api.central.sonatype.com/swagger-ui/#/ and authenticate with mavenCentralAuthorization, then try to post the submitted repo key
+            }
+            maven {
+                name = "GHPackages"
+                url = uri(GH_PACKAGES_URI)
+                credentials {
+                    username = ghUser
+                    password = ghKey
+                }
+            }
+        }
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+//                artifact androidJavadocJar
+//                artifact javaSourcesJar
+
+                groupId = REL_GROUP
+                version = project.ext.version
+                pom {
+                    name = artifactId
+                    description = POM_DESCRIPTION
+                    url = POM_URL
+                    licenses {
+                        license {
+                            name = POM_LICENCE_NAME
+                            url = POM_LICENCE_URL
+                        }
+                    }
+                    scm {
+                        connection = POM_SCM_CONNECTION
+                        url = POM_SCM_URL
+                    }
+                    developers {
+                        developer {
+                            id = POM_DEVELOPER_ID
+                            name = POM_DEVELOPER_NAME
+                            email = POM_DEVELOPER_EMAIL
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+signing {
+    def signingKey = localProps != null && localProps.containsKey('signing.key') ? localProps.getProperty('signing.key') : System.getenv('GPG_SIGN_KEY')
+    def signingPassword = localProps != null && localProps.containsKey('signing.password') ? localProps.getProperty('signing.password') : System.getenv('GPG_SIGN_PASSWORD')
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications
+}
