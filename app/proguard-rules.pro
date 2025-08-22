@@ -9,6 +9,10 @@
 # For wedge construction (from xml parser)
 -keep class * extends com.itachi1706.abp.attribouter.wedges.Wedge
 
+# Misc
+-dontwarn java.lang.management.ManagementFactory
+-dontwarn java.lang.management.RuntimeMXBean
+
 ##---------------End: Attribouter-specific configuration ----------
 
 ##---------------Begin: proguard configuration for Ktor -------
