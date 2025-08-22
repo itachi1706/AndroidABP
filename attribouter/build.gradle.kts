@@ -88,3 +88,5 @@ dependencies {
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
 }
+
+apply(from = "./publish.gradle")
