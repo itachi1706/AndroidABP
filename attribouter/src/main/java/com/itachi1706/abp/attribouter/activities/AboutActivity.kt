@@ -1,15 +1,12 @@
 package com.itachi1706.abp.attribouter.activities
 
-import android.graphics.Color
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat

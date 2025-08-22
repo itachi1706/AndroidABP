@@ -1,6 +1,5 @@
 package com.itachi1706.abp.gitrest.model
 
-import android.util.Log
 import com.itachi1706.abp.gitrest.util.DEFAULT_PROVIDERS
 
 class ProviderString {
@@ -25,7 +24,7 @@ class ProviderString {
 
         // TODO: parse URL as provider-string (split into context:id with no known provider) - partial support for HTTP and SSH uris wouldn't be bad (ignore `git` provider, strip off `*.git` from end of ids, etc...)
 
-        val providerRegex = """(?:(\w*)(?:@([\w.]*))?:)?([\w-_./+]*)""".toRegex()
+        val providerRegex = """(?:(\w*)(?:@([\w.]*))?:)?([\w-./+]*)""".toRegex()
         val hostnameRegex = """(\w+\.\w+)$""".toRegex()
 
         val (provider, hostname, id) = providerRegex.matchEntire(str)?.destructured ?: throw RuntimeException("GIT-REST: Unable to parse ProviderString '$str'")
