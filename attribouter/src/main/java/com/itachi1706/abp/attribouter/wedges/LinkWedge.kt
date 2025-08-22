@@ -52,10 +52,10 @@ open class LinkWedge(
         else null
     }
 
-    override fun equals(obj: Any?): Boolean {
-        return (obj as? LinkWedge)?.let {
-            (id?.equals(it.id) ?: false) || (url?.equals(obj.url) ?: false)
-        } ?: super.equals(obj)
+    override fun equals(other: Any?): Boolean {
+        return (other as? LinkWedge)?.let {
+            (id?.equals(it.id) ?: false) || (url?.equals(other.url) ?: false)
+        } ?: super.equals(other)
     }
 
     override fun compareTo(other: LinkWedge): Int {

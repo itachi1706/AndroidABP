@@ -25,6 +25,7 @@ class DiskCache(
 
     fun String.cacheFile() = File(cacheDir, "${this.replace(File.separator, "_")}.json")
 
+    @Suppress("UNCHECKED_CAST")
     @InternalSerializationApi
     override suspend fun set(key: String, value: Any) {
         // obtain a serializer + type for the value (this is all just a ridiculous hack)
@@ -51,16 +52,17 @@ class DiskCache(
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     @InternalSerializationApi
-    override suspend fun <T> get(key: String): T? {
+    override suspend fun <T> get(id: String): T? {
         return try {
             // check contents; destructure file parts if safe
-            val fileContents = key.cacheFile().readText().split("#", limit = 3)
+            val fileContents = id.cacheFile().readText().split("#", limit = 3)
             if (fileContents.size != 3) return null
             val (className, lastModified, json) = fileContents
 
             // obtain the correct serializer for {className}
-            Log.d("GIT-REST", "DiskCache: Deserializing $key with class $className")
+            Log.d("GIT-REST", "DiskCache: Deserializing $id with class $className")
             val serializer = if (className.startsWith("list:"))
                 ListSerializer(Class.forName(className.substring(5)).kotlin.serializer()) as KSerializer<Any>
             else Class.forName(className).kotlin.serializer() as KSerializer<Any>

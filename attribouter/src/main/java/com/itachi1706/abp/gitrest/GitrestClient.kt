@@ -19,6 +19,7 @@ class GitrestClient(
 
     private val providers: MutableMap<String, RequestProvider> = HashMap()
 
+    @Suppress("UNCHECKED_CAST")
     private suspend fun <T> get(str: String, endpointKey: String, block: suspend (RequestProvider, String) -> T?) : T? {
         val providerStr = ProviderString(str)
         val requestKey = "$providerStr:$endpointKey"

@@ -21,6 +21,7 @@ abstract class Wedge<T : Wedge.ViewHolder>(@param:LayoutRes val layoutRes: Int) 
         override fun apply(original: Boolean?, value: Boolean?): Boolean? = original == true || value == true
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun <R: Wedge<*>> create(lifecycle: LifecycleInstance? = null) : R {
         this.lifecycle = lifecycle
 
@@ -123,6 +124,7 @@ abstract class Wedge<T : Wedge.ViewHolder>(@param:LayoutRes val layoutRes: Int) 
             return value ?: original
         }
 
+        @Suppress("UNCHECKED_CAST")
         operator fun getValue(thisRef: R?, prop: KProperty<*>?): T {
             return if ((property as? String)?.startsWith('^') == true)
                 (property as? String)?.substring(1) as T
@@ -134,6 +136,7 @@ abstract class Wedge<T : Wedge.ViewHolder>(@param:LayoutRes val layoutRes: Int) 
                 property = apply(property, value)
         }
 
+        @Suppress("UNCHECKED_CAST")
         open fun mergeValue(value: Any?) {
             (value as? T?).let { setValue(null, null, it) }
         }

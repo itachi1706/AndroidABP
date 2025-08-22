@@ -12,6 +12,7 @@ class WedgeAdapter(private val wedges: List<Wedge<*>>) : RecyclerView.Adapter<We
         return info.getViewHolder(LayoutInflater.from(parent.context).inflate(info.layoutRes, parent, false))
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(holder: Wedge.ViewHolder, position: Int) {
         (wedges[position] as? Wedge<Wedge.ViewHolder>)?.bind(holder.itemView.context, holder)
     }

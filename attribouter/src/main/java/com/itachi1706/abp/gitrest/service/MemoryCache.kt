@@ -31,14 +31,15 @@ class MemoryCache(
         underlyingCache.set(key, value)
     }
 
-    override suspend fun <T> get(key: String): T? {
-        val weakEntry = map[key]
+    @Suppress("UNCHECKED_CAST")
+    override suspend fun <T> get(id: String): T? {
+        val weakEntry = map[id]
         weakEntry?.get()?.let {
             return it as? T
         }
 
-        underlyingCache.get<T>(key)?.let {
-            map[key] = WeakEntry(key, it as Any, referenceQueue)
+        underlyingCache.get<T>(id)?.let {
+            map[id] = WeakEntry(id, it as Any, referenceQueue)
             return it
         }
 

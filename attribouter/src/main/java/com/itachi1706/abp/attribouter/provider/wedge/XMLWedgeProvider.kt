@@ -86,6 +86,7 @@ class XMLWedgeProvider(private val parser: XmlPullParser) : WedgeProvider {
         return wedges
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T> getAttribute(wedge: Wedge<*>, attribute: String, defaultValue: T?): T? {
         if (defaultValue is Boolean)
             return (parser as? XmlResourceParser)?.getAttributeBooleanValue(null, attribute, defaultValue) as? T
