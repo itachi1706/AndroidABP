@@ -7,7 +7,7 @@ import java.lang.ref.WeakReference
  * Naive caching implementation for the JVM that uses WeakReference
  * as a cache "buffer" that can be cleaned up by the GC when necessary.
  */
-class MemoryCache constructor(
+class MemoryCache(
     val underlyingCache: Cache = NoCache
 ) : Cache {
 
@@ -44,5 +44,6 @@ class MemoryCache constructor(
 
         return null
     }
+
 
 }

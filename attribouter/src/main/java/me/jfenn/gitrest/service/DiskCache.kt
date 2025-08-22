@@ -1,5 +1,6 @@
 package me.jfenn.gitrest.service
 
+import android.util.Log
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
@@ -59,6 +60,7 @@ class DiskCache(
             val (className, lastModified, json) = fileContents
 
             // obtain the correct serializer for {className}
+            Log.d("GIT-REST", "DiskCache: Deserializing $key with class $className")
             val serializer = if (className.startsWith("list:"))
                 ListSerializer(Class.forName(className.substring(5)).kotlin.serializer()) as KSerializer<Any>
             else Class.forName(className).kotlin.serializer() as KSerializer<Any>

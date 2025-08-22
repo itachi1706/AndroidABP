@@ -29,8 +29,8 @@ junit = { module = "junit:junit", version.ref = "junitVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClient" }
-ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktorClient" }
-ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktorClient" }
+ktor-client-json = { module = "io.ktor:ktor-client-json-jvm", version.ref = "ktorClient" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization-jvm", version.ref = "ktorClient" }
 ktor-http = { module = "io.ktor:ktor-http", version.ref = "ktorClient" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 multidex = { module = "com.android.support:multidex", version.ref = "multidex" }

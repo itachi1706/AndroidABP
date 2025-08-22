@@ -8,6 +8,9 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
+/**
+ * Custom kotlin.String serializer that returns empty/blank strings as null.
+ */
 open class OptionalStringSerializer : KSerializer<String?> {
 
     final override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("kotlin.OptionalString", PrimitiveKind.STRING)

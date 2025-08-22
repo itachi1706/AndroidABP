@@ -3,6 +3,7 @@ package me.jfenn.gitrest.model
 import kotlinx.serialization.Transient
 
 open class DelegateResource {
+
     @Transient
     open var id: String = ""
     @Transient
@@ -19,4 +20,5 @@ open class DelegateResource {
         if (id.isBlank())
             throw RuntimeException("GIT-REST: Malformed response, .id not provided in ${this::class.simpleName}, requested $providerString")
     }
+
 }

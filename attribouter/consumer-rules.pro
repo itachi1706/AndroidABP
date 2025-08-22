@@ -34,12 +34,17 @@
 
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.SerializationKt
--keep,includedescriptorclasses class com.yourcompany.yourpackage.**$$serializer { *; } # <-- change package name to your app's
+-keep,includedescriptorclasses class me.jfenn.gitrest.**$$serializer { *; } # <-- change package name to your app's
 -keepclassmembers class me.jfenn.gitrest.** { # <-- change package name to your app's
     *** Companion;
 }
 -keepclasseswithmembers class me.jfenn.gitrest.** { # <-- change package name to your app's
     kotlinx.serialization.KSerializer serializer(...);
 }
+
+-keepclassmembers class * {
+    @kotlinx.serialization.Serializable <fields>;
+}
+-keep class *$$serializer { *; }
 
 ##---------------End: proguard configuration for gitrest ---------
