@@ -7,13 +7,12 @@ plugins {
 
 android {
     compileSdk = 36
-//    namespace = "com.itachi1706.abp"
-    namespace = "me.jfenn.attriboutersample"
+    namespace = "com.itachi1706.abp.attriboutersample"
 
     defaultConfig {
         applicationId = "me.jfenn.attriboutersample"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 

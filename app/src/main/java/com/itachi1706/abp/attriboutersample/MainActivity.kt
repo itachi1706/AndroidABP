@@ -1,4 +1,4 @@
-package me.jfenn.attriboutersample
+package com.itachi1706.abp.attriboutersample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
             withTheme(com.itachi1706.abp.attribouter.R.style.AttribouterTheme_DayNight)
             withGitHubToken(BuildConfig.GITHUB_TOKEN)
         }
+        finish()
     }
 
 }
