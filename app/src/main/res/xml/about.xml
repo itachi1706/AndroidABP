@@ -107,7 +107,7 @@
         overflow="1"
         showDefaults="false">
 
-        <LicenseWedge repo="gitlab:arcmenu-team/Arc-Menu" />
+        <LicenseWedge repo="gitlab:LinxGem33/Arc-Menu" />
 
         <LicenseWedge repo="fennifith/ColorPickerDialog" />
         <!-- all of ColorPickerDialog's info is fetched from github -->
