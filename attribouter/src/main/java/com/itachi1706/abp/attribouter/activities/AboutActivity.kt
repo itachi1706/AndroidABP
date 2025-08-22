@@ -14,6 +14,7 @@ import androidx.core.view.updateLayoutParams
 import com.itachi1706.abp.attribouter.Attribouter
 import com.itachi1706.abp.attribouter.R
 import com.itachi1706.abp.attribouter.fragments.AboutFragment
+import com.itachi1706.abp.utils.addEdgeToEdgeFlags
 import com.itachi1706.abp.utils.autoSystemUiColors
 import com.itachi1706.abp.utils.bind
 import com.itachi1706.abp.utils.getThemedColor
@@ -30,26 +31,6 @@ class AboutActivity : AppCompatActivity() {
         setContentView(R.layout.attribouter_activity_about)
         setSupportActionBar(toolbar)
 
-        // Add color
-        val statusBarView = View(this)
-        window.addContentView(statusBarView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-        // Set the status bar color to match the theme
-        statusBarView.setBackgroundColor(this.getThemedColor(R.attr.attribouter_textColorAccent))
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        val rootView = findViewById<View>(android.R.id.content)
-        ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars())
-            v.setPadding(insets.left, insets.top, insets.right, insets.bottom)
-
-            statusBarView.updateLayoutParams {
-                height = insets.top
-            }
-
-            WindowInsetsCompat.CONSUMED
-        }
-
-
         val fragment = AboutFragment()
 
         if (bundle != null) fragment.arguments = bundle
@@ -58,6 +39,7 @@ class AboutActivity : AppCompatActivity() {
         else supportFragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit()
 
         // handle light status/nav bar colors
+        window.addEdgeToEdgeFlags()
         window.autoSystemUiColors()
     }
 

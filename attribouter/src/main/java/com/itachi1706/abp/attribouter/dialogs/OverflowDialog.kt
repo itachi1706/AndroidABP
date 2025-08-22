@@ -11,6 +11,7 @@ import com.itachi1706.abp.attribouter.adapters.WedgeAdapter
 import com.itachi1706.abp.attribouter.utils.ResourceUtils.getString
 import com.itachi1706.abp.attribouter.utils.getThemeAttr
 import com.itachi1706.abp.attribouter.wedges.Wedge
+import com.itachi1706.abp.utils.addEdgeToEdgeFlags
 import com.itachi1706.abp.utils.autoSystemUiColors
 import com.itachi1706.abp.utils.bind
 
@@ -28,6 +29,7 @@ open class OverflowDialog(
 
     override fun onStart() {
         super.onStart()
+        window?.addEdgeToEdgeFlags()
         window?.autoSystemUiColors()
     }
 

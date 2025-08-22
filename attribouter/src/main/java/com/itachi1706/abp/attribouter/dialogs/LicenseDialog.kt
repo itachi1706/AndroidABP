@@ -12,6 +12,7 @@ import com.itachi1706.abp.attribouter.utils.UrlClickListener
 import com.itachi1706.abp.attribouter.utils.getThemeAttr
 import com.itachi1706.abp.attribouter.utils.toListString
 import com.itachi1706.abp.attribouter.wedges.LicenseWedge
+import com.itachi1706.abp.utils.addEdgeToEdgeFlags
 import com.itachi1706.abp.utils.autoSystemUiColors
 import com.itachi1706.abp.utils.bind
 
@@ -40,6 +41,8 @@ class LicenseDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.attribouter_dialog_license)
+
+        window?.addEdgeToEdgeFlags()
 
         val licenseName = getString(context, license.licenseName)
 

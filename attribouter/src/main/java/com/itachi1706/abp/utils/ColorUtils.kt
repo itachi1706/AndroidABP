@@ -3,8 +3,14 @@ package com.itachi1706.abp.utils
 import android.graphics.Color
 import android.os.Build
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import androidx.annotation.ColorInt
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import com.itachi1706.abp.attribouter.R
 
 /**
  * Determine if a color is readable on a light background, using some magic numbers.
@@ -38,8 +44,14 @@ private fun getColorDarkness(@ColorInt color: Int): Double {
 /**
  * Set light status/navigation bar window flags automatically.
  * Falls back to Color.BLACK on lower SDK versions.
+ *
+ * For SDK 30 and above, this is handled by the system automatically.
  */
+@Suppress("DEPRECATION") // Deprecated for SDK 30 and above, but we still need to support lower SDK versions
 fun Window.autoSystemUiColors() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        return // No need to do anything, this is handled by the system
+    }
     // handle light status bar colors
     if (statusBarColor.isColorLight()) {
         if (Build.VERSION.SDK_INT >= 23)
@@ -52,5 +64,26 @@ fun Window.autoSystemUiColors() {
         if (Build.VERSION.SDK_INT >= 26)
             decorView.systemUiVisibility = decorView.systemUiVisibility.or(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR)
         else navigationBarColor = Color.BLACK
+    }
+}
+
+fun Window.addEdgeToEdgeFlags() {
+    // Add color
+    val statusBarView = View(this.context)
+    addContentView(statusBarView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+    // Set the status bar color to match the theme
+    statusBarView.setBackgroundColor(this.context.getThemedColor(R.attr.attribouter_textColorAccent))
+
+    WindowCompat.setDecorFitsSystemWindows(this, false)
+    val rootView = findViewById<View>(android.R.id.content)
+    ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, windowInsets ->
+        val insets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars())
+        v.setPadding(insets.left, insets.top, insets.right, insets.bottom)
+
+        statusBarView.updateLayoutParams {
+            height = insets.top
+        }
+
+        WindowInsetsCompat.CONSUMED
     }
 }
