@@ -65,7 +65,7 @@ fun LicensesWedge.addDefaults() {
                     licenseKey = "apache-2.0"
             ).create(lifecycle),
             LicenseWedge(
-                    repo = "gitea@code.horrific.dev:james/git-rest-wrapper",
+                    repo = "gitlab:fennifith/git-rest-wrapper",
                     title = "^Git REST Wrapper",
                     description = "A 'universal' / normalized API wrapper for git hosting platforms.",
                     licenseName = "Mozilla Public License 2.0",

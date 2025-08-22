@@ -3,7 +3,9 @@ package me.jfenn.gitrest.base
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.http.ContentType.Application.Json
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import me.jfenn.gitrest.model.GitrestConfig
 
 interface ServiceBuilder<T: RequestProvider> {
@@ -14,7 +16,7 @@ interface ServiceBuilder<T: RequestProvider> {
     fun GitrestConfig.ktor(block: HttpClientConfig<*>.() -> Unit) : HttpClient {
         return HttpClient {
             install(ContentNegotiation) {
-                json()
+                json(Json{ignoreUnknownKeys = true})
             }
 
             block()
