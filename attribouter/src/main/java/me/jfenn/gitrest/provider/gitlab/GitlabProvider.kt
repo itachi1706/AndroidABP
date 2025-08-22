@@ -1,7 +1,8 @@
 package me.jfenn.gitrest.provider.gitlab
 
 import io.ktor.client.HttpClient
-import io.ktor.client.features.defaultRequest
+import io.ktor.client.call.body
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.http.URLProtocol
@@ -17,16 +18,16 @@ class GitlabProvider(
 ) : RequestProvider {
 
     override suspend fun getUser(str: String): GitlabUser? {
-        val userList = client.get<List<GitlabUser>>("api/v4/users?username=${str}")
+        val userList = client.get("api/v4/users?username=${str}").body<List<GitlabUser>>()
         return userList.firstOrNull()
     }
 
     // TODO: create proper url-encode utility function instead of String.replace
-    override suspend fun getRepo(str: String): GitlabRepo? = client.get("api/v4/projects/${str.replace("/", "%2F")}?license=true")
+    override suspend fun getRepo(str: String): GitlabRepo? = client.get("api/v4/projects/${str.replace("/", "%2F")}?license=true").body()
 
-    override suspend fun getRepoContributors(str: String): List<GitlabUser>? = client.get("api/v4/projects/${str.replace("/", "%2F")}/users")
+    override suspend fun getRepoContributors(str: String): List<GitlabUser>? = client.get("api/v4/projects/${str.replace("/", "%2F")}/users").body()
 
-    override suspend fun getLicense(str: String): GitlabLicense? = client.get("api/v4/templates/licenses/${str}")
+    override suspend fun getLicense(str: String): GitlabLicense? = client.get("api/v4/templates/licenses/${str}").body()
 
     companion object: ServiceBuilder<GitlabProvider> {
         override val key = "gitlab"

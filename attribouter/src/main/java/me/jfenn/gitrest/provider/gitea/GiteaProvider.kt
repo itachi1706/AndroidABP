@@ -1,7 +1,8 @@
 package me.jfenn.gitrest.provider.gitea
 
 import io.ktor.client.HttpClient
-import io.ktor.client.features.defaultRequest
+import io.ktor.client.call.body
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.http.URLProtocol
@@ -16,11 +17,11 @@ class GiteaProvider(
     val client: HttpClient = HttpClient()
 ) : RequestProvider {
 
-    override suspend fun getUser(str: String): GiteaUser? = client.get("api/v1/users/${str}")
+    override suspend fun getUser(str: String): GiteaUser? = client.get("api/v1/users/${str}").body()
 
-    override suspend fun getRepo(str: String): GiteaRepo? = client.get("api/v1/repos/${str}")
+    override suspend fun getRepo(str: String): GiteaRepo? = client.get("api/v1/repos/${str}").body()
 
-    override suspend fun getRepoContributors(str: String): List<GiteaUser>? = client.get("api/v1/repos/${str}/collaborators")
+    override suspend fun getRepoContributors(str: String): List<GiteaUser>? = client.get("api/v1/repos/${str}/collaborators").body()
 
     override suspend fun getLicense(str: String): License? = null
 

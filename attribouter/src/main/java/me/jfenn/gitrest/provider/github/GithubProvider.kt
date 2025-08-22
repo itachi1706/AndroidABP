@@ -1,7 +1,8 @@
 package me.jfenn.gitrest.provider.github
 
 import io.ktor.client.HttpClient
-import io.ktor.client.features.defaultRequest
+import io.ktor.client.call.body
+import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.http.URLProtocol
@@ -16,13 +17,13 @@ class GithubProvider(
     val client: HttpClient = HttpClient()
 ) : RequestProvider {
 
-    override suspend fun getUser(str: String): GithubUser? = client.get("users/${str}")
+    override suspend fun getUser(str: String): GithubUser? = client.get("users/${str}").body()
 
-    override suspend fun getRepo(str: String): GithubRepo? = client.get("repos/${str}")
+    override suspend fun getRepo(str: String): GithubRepo? = client.get("repos/${str}").body()
 
-    override suspend fun getRepoContributors(str: String): List<GithubUser>? = client.get("repos/${str}/contributors")
+    override suspend fun getRepoContributors(str: String): List<GithubUser>? = client.get("repos/${str}/contributors").body()
 
-    override suspend fun getLicense(str: String): GithubLicense? = client.get("licenses/${str}")
+    override suspend fun getLicense(str: String): GithubLicense? = client.get("licenses/${str}").body()
 
     companion object: ServiceBuilder<GithubProvider> {
         override val key = "github"
