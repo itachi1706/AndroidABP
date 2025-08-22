@@ -20,7 +20,7 @@
         android:background="?attr/selectableItemBackground"
         android:padding="16dp">
 
-        <me.jfenn.attribouter.views.CircleImageView
+        <com.itachi1706.abp.attribouter.views.CircleImageView
             android:id="@+id/image"
             android:layout_width="40dp"
             android:layout_height="40dp"

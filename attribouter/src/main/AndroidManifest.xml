@@ -1,12 +1,11 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.jfenn.attribouter">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
 
         <activity
-            android:name=".activities.AboutActivity"
+            android:name="com.itachi1706.abp.attribouter.activities.AboutActivity"
             android:theme="@style/AttribouterTheme.DayNight" />
 
     </application>

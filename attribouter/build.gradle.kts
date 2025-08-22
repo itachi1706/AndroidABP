@@ -12,8 +12,7 @@ ext.set("versionCode", 18)
 
 android {
     compileSdk = 36
-//    namespace = "com.itachi1706.abp"
-    namespace = "me.jfenn.attribouter"
+    namespace = "com.itachi1706.abp.attribouter"
 
     defaultConfig {
         minSdk = 21

@@ -1,13 +1,13 @@
 ##---------------Begin: Attribouter-specific configuration --------
 
 # For xml-specified drawable resources
--keep class me.jfenn.attribouter.R$*
--keepclassmembers class me.jfenn.attribouter.R$* {
+-keep class com.itachi1706.abp.attribouter.R$*
+-keepclassmembers class com.itachi1706.abp.attribouter.R$* {
     public static <fields>;
 }
 
 # For wedge construction (from xml parser)
--keep class * extends me.jfenn.attribouter.wedges.Wedge
+-keep class * extends com.itachi1706.abp.attribouter.wedges.Wedge
 
 ##---------------End: Attribouter-specific configuration ----------
 
@@ -34,11 +34,11 @@
 
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.SerializationKt
--keep,includedescriptorclasses class me.jfenn.gitrest.**$$serializer { *; } # <-- change package name to your app's
--keepclassmembers class me.jfenn.gitrest.** { # <-- change package name to your app's
+-keep,includedescriptorclasses class com.itachi1706.abp.gitrest.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.itachi1706.abp.gitrest.** { # <-- change package name to your app's
     *** Companion;
 }
--keepclasseswithmembers class me.jfenn.gitrest.** { # <-- change package name to your app's
+-keepclasseswithmembers class com.itachi1706.abp.gitrest.** { # <-- change package name to your app's
     kotlinx.serialization.KSerializer serializer(...);
 }
 

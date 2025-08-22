@@ -2,7 +2,7 @@ package me.jfenn.attriboutersample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import me.jfenn.attribouter.attribouterActivity
+import com.itachi1706.abp.attribouter.attribouterActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         // immediately start the Attribouter activity
         attribouterActivity {
             withFile(R.xml.about)
-            withTheme(me.jfenn.attribouter.R.style.AttribouterTheme_DayNight)
+            withTheme(com.itachi1706.abp.attribouter.R.style.AttribouterTheme_DayNight)
             withGitHubToken(BuildConfig.GITHUB_TOKEN)
         }
     }
