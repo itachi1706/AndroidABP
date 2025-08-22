@@ -56,6 +56,13 @@ android {
             }
         }, this))
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 kotlin {

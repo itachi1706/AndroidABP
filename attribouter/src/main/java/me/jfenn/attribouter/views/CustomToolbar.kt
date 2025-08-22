@@ -18,7 +18,7 @@ class CustomToolbar : MaterialToolbar {
     constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) { init() }
 
     fun init() {
-        val color = if (context.getThemedColor(R.attr.colorPrimary).isColorLight()) Color.BLACK else Color.WHITE
+        val color = if (context.getThemedColor(androidx.appcompat.R.attr.colorPrimary).isColorLight()) Color.BLACK else Color.WHITE
         setTitleTextColor(color)
 
         navigationIcon = VectorDrawableCompat.create(resources, R.drawable.attribouter_ic_arrow_back, context.theme)?.let {
