@@ -34,7 +34,7 @@
 
     </TextWedge>
 
-    <ContributorsWedge title="Library Contributors" repo="fennifith/Attribouter">
+    <ContributorsWedge title="Library Contributors" repo="itachi1706/AndroidABP">
         <ContributorWedge
             avatar="^@drawable/me"
             bio="This is a bio. I am a person."

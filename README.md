@@ -1,17 +1,18 @@
 Note: This is a fork of the original Attribouter repository for my personal use. It is not maintained by the original author and may not receive updates or support. Use at your own risk.
 Support the original author @ https://github.com/fennifith/Attribouter
 
+Android ABP
+===
+
+This is a forked version of Attribouter that has been updated to support the latest version of Android. For the original repository, please visit the link above. Most of the relevant documentation has been left below in its original state.
+
+Original README
+===
+
 <p align="center"><img alt="Attribouter" width="128px" style="width: 128px;" src="https://raw.githubusercontent.com/fennifith/Attribouter/main/.github/images/icon.png" /></p>
 <h1 align="center">Attribouter</h1>
 <p align="center">
     Attribouter is a lightweight "about screen" for Android apps, built for developers to easily credit a project's contributors & dependencies while matching the style of their app. It ships with the ability to fetch metadata directly from GitHub, GitLab, or Gitea (see: <a href="https://code.horrific.dev/james/git-rest-wrapper">git-rest-wrapper</a>), allowing contributors and licenses to be updated or modified without explicit configuration.
-</p>
-<p align="center">
-	<a href="https://jitpack.io/#me.jfenn/Attribouter"><img alt="JitPack" src="https://jitpack.io/v/me.jfenn/Attribouter.svg" /></a>
-	<a href="https://github.com/fennifith/Alarmio/actions"><img alt="Build Status" src="https://github.com/fennifith/Attribouter/workflows/Gradle%20Build/badge.svg" /></a>
-	<a href="https://discord.jfenn.me/"><img alt="Discord" src="https://img.shields.io/discord/514625116706177035.svg?logo=discord&colorB=7289da" /></a>
-	<a href="https://liberapay.com/fennifith/donate"><img alt="Liberapay" src="https://img.shields.io/badge/liberapay-donate-yellow.svg?logo=liberapay" /></a>
-	<a href="https://jfenn.me/projects/attribouter/wiki/"><img alt="Documentation" src="https://img.shields.io/static/v1?label=wiki&message=jfenn.me&color=blue" /></a>
 </p>
 
 ### Screenshots
@@ -26,16 +27,7 @@ A demo apk of the sample project can be downloaded [here](../../releases/).
 
 ## Usage
 
-This library is published on [JitPack](https://jitpack.io), which you can add to your project by copying the following to your root build.gradle at the end of "repositories".
-
-```gradle
-allprojects {
-  repositories {
-    ...
-    maven { url 'https://jitpack.io' }
-  }
-}
-```
+> This library will be published on [Maven Central](https://central.sonatype.com/), more info coming soon. 
 
 To add the dependency, copy this line into your app module's build.gradle file.
 
@@ -115,42 +107,8 @@ For those using the R8 compiler, Attribouter's [proguard rules](./attribouter/co
 
 Unfortunately, Attribouter still doesn't behave well with `shrinkResources`, as the compiler cannot detect references from Attribouter's config file and will exclude them from compilation. There is a [workaround](https://developer.android.com/studio/build/shrink-code#shrink-resources) to this, however - create a `<resources>` tag somewhere in your project, and specify `tools:keep="@{resource}"` for all of the strings and drawables referenced by your config file. For all of Attribouter's own resources, this has already been done - and if you are not referencing any other resources in your configuration, then there shouldn't be an issue.
 
-## Used in
-
-- [Lawnchair Launcher](https://github.com/LawnchairLauncher/Lawnchair)
-- [EtchDroid](https://github.com/EtchDroid/EtchDroid)
-- [Status](https://github.com/fennifith/Status)
-- [Alarmio](https://github.com/fennifith/Alarmio)
-
-If you're using Attribouter in your project, feel free to reach out / make a PR to add it to this list!
-
-## How to Contribute
-
-I try to maintain my libraries to meet the needs of all their users - so, to that extent, most contributions will be accepted so long as they represent some kind of functional improvement. I'd much prefer to work together and resolve an issue than turn any genuine effort away. To that end, **if you need help with this process, have any questions or confusion, or want to get feedback before a contribution, please don't hesitate to get in touch.** (either [discord](https://discord.jfenn.me) or [email](mailto:dev@jfenn.me) work fine)
-
-This repository has two persistent branches: `main` and `develop` - of the two, most pull requests should be made to the latter. `main` will always contain the source code of the current stable release, so any new changes should be merged into `develop` first. The exception to this is any changes to metadata: the README, documentation, code of conduct, etc. - since these don't affect the compiled program, it makes sense to merge these into `main` immediately, unless they are tied to a change in functionality (changes in a new version of the library, for example).
-
-### Example contributions
-
-- **Development:** Developers can help Alarmio by fixing bugs, implementing features, or helping to debug & research new issues. I'm hoping to write a complete guide to this process in the future - for now, please refer to [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
-- **Design:** Attribouter should be intuitive and accessible to a wide variety of users - suggestions to improve certain interfaces are always welcome. This includes compatibility with screen readers, problems with contrast / color blindness, and the sizing/positioning of touch targets in the UI - many of which are shamefully untested in its present state.
-- **Localization:** If Attribouter doesn't have support for your fluent language(s), please consider translating it! Most in-app text is stored in [strings.xml](./attribouter/src/main/res/values/strings.xml) - this file should be copied to ../values-{lang}/strings.xml when translated. (this is an absurdly concise explanation - if this isn't clear, simply sending us translations in a new issue or email is perfectly fine!)
-- **Documentation:** Writing guides and explanations of how Attribouter works, how to use it, and how to contribute to it can go a long way to ensuring its usefulness and stability in the future. Whether this involves an update to the README, a tutorial for users and contributors, or adding Javadocs & comments to undocumented parts of the codebase - anything is valid!
-
 ## Acknowledgements
 
 Huge thanks to [everyone that's helped with this library](https://github.com/fennifith/Attribouter/graphs/contributors), directly or otherwise!
 
 Also, mega props to [Kevin Aguilar](https://twitter.com/kevttob) and [221 Pixels](https://221pxls.com/) for helping improve the library's design & interface.
-
-### Development
-
-- [@fennifith](https://github.com/fennifith) (me) 
-- [@rroyGit](https://github.com/rroyGit)
-- [@gcantoni](https://github.com/gcantoni)
-- [@divadsn](https://github.com/divadsn)
-- [@jahirfiquitiva](https://github.com/jahirfiquitiva)
-
-### Design
-
-- [@221pxls](https://twitter.com/221pxls)
