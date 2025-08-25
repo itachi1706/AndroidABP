@@ -3,21 +3,14 @@ package com.itachi1706.abp.attribouter.activities
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
 import com.itachi1706.abp.attribouter.Attribouter
 import com.itachi1706.abp.attribouter.R
 import com.itachi1706.abp.attribouter.fragments.AboutFragment
 import com.itachi1706.abp.utils.addEdgeToEdgeFlags
 import com.itachi1706.abp.utils.autoSystemUiColors
 import com.itachi1706.abp.utils.bind
-import com.itachi1706.abp.utils.getThemedColor
 
 class AboutActivity : AppCompatActivity() {
 
