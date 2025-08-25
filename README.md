@@ -27,12 +27,24 @@ A demo apk of the sample project can be downloaded [here](../../releases/).
 
 ## Usage
 
-> This library will be published on [Maven Central](https://central.sonatype.com/), more info coming soon. 
+This library will be published on [Maven Central](https://central.sonatype.com/), to add the dependency, copy this line into your app module's build.gradle file.
 
-To add the dependency, copy this line into your app module's build.gradle file.
-
+#### Maven Central
 ```gradle
-implementation 'me.jfenn:Attribouter:0.1.8'
+implementation 'com.itachi1706.abp:attribouter:1.0.0'
+```
+
+#### GitHub Packages
+```gradle
+    // Root-level Gradle file (build.gradle)
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.github.com/itachi1706/AndroidABP")
+        }
+    }
+
+    // App-level Gradle file (app/build.gradle)
+    implementation 'com.itachi1706.abp:attribouter:1.0.0'
 ```
 
 ### Starting an Activity
