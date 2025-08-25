@@ -29,35 +29,40 @@ class ProviderString {
 
         val (provider, hostname, id) = providerRegex.matchEntire(str)?.destructured ?: throw RuntimeException("GIT-REST: Unable to parse ProviderString '$str'")
 
-        if (provider.isEmpty() && hostname.isEmpty()) {
-            // neither a provider or hostname were specified; just use the first default
-            val default = DEFAULT_PROVIDERS.first()
-            this.provider = default.provider
-            this.hostname = default.hostname
-        } else if (provider.isEmpty() || provider == "git") {
-            // missing provider: find the first provider with a matching hostname
-            val default = DEFAULT_PROVIDERS.find {
-                hostnameRegex.find(it.hostname)?.value == hostnameRegex.find(hostname)?.value
-            } ?: throw RuntimeException("GIT-REST: Unable to find a default provider for '$str'")
-
-            this.provider = default.provider
-            this.hostname = default.hostname
-        } else if (hostname.isEmpty()) {
-            // missing context: find the first hostname that provides the interface
-            val default = DEFAULT_PROVIDERS.find {
-                it.provider == provider
-            } ?: throw RuntimeException("GIT-REST: Unable to find a default context for '$str'")
-
-            this.provider = provider
-            this.hostname = default.hostname
-        } else {
-            // if a matching default provider exists, use its hostname; this way, "api.root.tld" and "root.tld" can be resolved
-            val default = DEFAULT_PROVIDERS.find {
-                it.provider == provider && hostnameRegex.find(it.hostname)?.value == hostnameRegex.find(hostname)?.value
+        when {
+            provider.isEmpty() && hostname.isEmpty() -> {
+                // neither a provider or hostname were specified; just use the first default
+                val default = DEFAULT_PROVIDERS.first()
+                this.provider = default.provider
+                this.hostname = default.hostname
             }
+            provider.isEmpty() || provider == "git" -> {
+                // missing provider: find the first provider with a matching hostname
+                val default = DEFAULT_PROVIDERS.find {
+                    hostnameRegex.find(it.hostname)?.value == hostnameRegex.find(hostname)?.value
+                } ?: throw RuntimeException("GIT-REST: Unable to find a default provider for '$str'")
 
-            this.provider = provider
-            this.hostname = default?.hostname ?: hostname
+                this.provider = default.provider
+                this.hostname = default.hostname
+            }
+            hostname.isEmpty() -> {
+                // missing context: find the first hostname that provides the interface
+                val default = DEFAULT_PROVIDERS.find {
+                    it.provider == provider
+                } ?: throw RuntimeException("GIT-REST: Unable to find a default context for '$str'")
+
+                this.provider = provider
+                this.hostname = default.hostname
+            }
+            else -> {
+                // if a matching default provider exists, use its hostname; this way, "api.root.tld" and "root.tld" can be resolved
+                val default = DEFAULT_PROVIDERS.find {
+                    it.provider == provider && hostnameRegex.find(it.hostname)?.value == hostnameRegex.find(hostname)?.value
+                }
+
+                this.provider = provider
+                this.hostname = default?.hostname ?: hostname
+            }
         }
 
         this.id = id
