@@ -14,6 +14,7 @@
         android:background="@drawable/attribouter_bg_action"
         android:backgroundTint="?android:textColorPrimary"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/content_desc_link"
         app:tint="?android:textColorPrimary"
         tools:src="@drawable/attribouter_ic_link" />
 

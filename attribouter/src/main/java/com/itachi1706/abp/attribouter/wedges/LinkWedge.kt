@@ -12,15 +12,16 @@ import com.itachi1706.abp.attribouter.R
 import com.itachi1706.abp.attribouter.utils.ResourceUtils
 import com.itachi1706.abp.attribouter.utils.UrlClickListener
 import com.itachi1706.abp.attribouter.utils.loadDrawable
+import com.itachi1706.abp.gitrest.model.ProviderString
 import com.itachi1706.abp.utils.getThemedColor
 import com.itachi1706.abp.utils.setBackgroundTint
 
 open class LinkWedge(
-        id: String? = null,
-        name: String? = null,
-        url: String? = null,
-        icon: String? = null,
-        priority: Int = 0
+    id: String? = null,
+    name: String? = null,
+    url: String? = null,
+    icon: String? = null,
+    priority: Int = 0
 ) : Wedge<LinkWedge.ViewHolder>(R.layout.attribouter_item_link), Comparable<LinkWedge> {
 
     var id: String? by attr("id", id)
@@ -56,6 +57,10 @@ open class LinkWedge(
         return (other as? LinkWedge)?.let {
             (id?.equals(it.id) ?: false) || (url?.equals(other.url) ?: false)
         } ?: super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return if (id == null || url == null) super.hashCode() else ProviderString("$id:$url").hashCode()
     }
 
     override fun compareTo(other: LinkWedge): Int {

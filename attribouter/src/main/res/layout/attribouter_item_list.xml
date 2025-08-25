@@ -24,6 +24,7 @@
         android:layout_height="48dp"
         android:background="?selectableItemBackground"
         android:scaleType="centerInside"
+        android:contentDescription="@string/content_desc_down_arrow"
         app:tint="?android:textColorPrimary"
         app:srcCompat="@drawable/attribouter_ic_expand_down" />
 

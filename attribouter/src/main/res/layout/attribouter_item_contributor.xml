@@ -38,7 +38,6 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/image"
             app:layout_constraintBottom_toTopOf="@+id/task"

@@ -98,7 +98,7 @@ open class AppWedge: Wedge<AppWedge.ViewHolder>(R.layout.attribouter_item_app_in
                 val packageInfo = context.packageManager.getPackageInfo(info.packageName, 0)
                 text = String.format(context.getString(R.string.attribouter_title_version), packageInfo.versionName)
                 visibility = View.VISIBLE
-            } catch (e: PackageManager.NameNotFoundException) {
+            } catch (_: PackageManager.NameNotFoundException) {
                 visibility = View.GONE
             }
         }
@@ -126,23 +126,6 @@ open class AppWedge: Wedge<AppWedge.ViewHolder>(R.layout.attribouter_item_app_in
                 }
             }
         }
-
-        /*viewHolder.links?.apply {
-            val children = getTypedChildren<LinkWedge>()
-            if (children.isNotEmpty()) {
-                val links = children.filter { link -> !link.isHidden }
-                Collections.sort(links, LinkWedge.Comparator(context))
-
-                layoutManager = FlexboxLayoutManager(context).apply {
-                    flexDirection = FlexDirection.ROW
-                    justifyContent = JustifyContent.CENTER
-                }
-                adapter = WedgeAdapter(links)
-                visibility = View.VISIBLE
-            } else {
-                visibility = View.GONE
-            }
-        }*/
     }
 
     open class ViewHolder(v: View) : Wedge.ViewHolder(v) {
@@ -151,7 +134,6 @@ open class AppWedge: Wedge<AppWedge.ViewHolder>(R.layout.attribouter_item_app_in
         var nameTextView: TextView? = v.findViewById(R.id.appName)
         var versionTextView: TextView? = v.findViewById(R.id.appVersion)
         var descriptionTextView: TextView? = v.findViewById(R.id.description)
-        //var links: RecyclerView? = v.findViewById(R.id.appLinks)
 
         var linkViews: Array<View?> = arrayOf(
                 v.findViewById(R.id.link_1),

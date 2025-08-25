@@ -1,5 +1,6 @@
 package com.itachi1706.abp.attribouter.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
@@ -16,7 +17,7 @@ import com.itachi1706.abp.attribouter.R
 fun Context.getDrawableSafe(res: Int) : Drawable? {
     return try {
         ContextCompat.getDrawable(this, res)
-    } catch (e: Resources.NotFoundException) {
+    } catch (_: Resources.NotFoundException) {
         VectorDrawableCompat.create(this.resources, res, this.theme)
     }
 }
@@ -32,7 +33,9 @@ fun Context.loadDrawable(identifier: String?, defaultRes: Int, set: (drawable: D
                 .load(identifier)
                 .apply(RequestOptions().placeholder(default).error(default))
                 .into(object : CustomTarget<Drawable>() {
-                    override fun onLoadCleared(placeholder: Drawable?) {}
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        // ignored
+                    }
 
                     override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                         set(resource)
@@ -57,6 +60,7 @@ object ResourceUtils {
         return if (resource != null) context.getString(resource) else ret
     }
 
+    @SuppressLint("DiscouragedApi")
     fun getResourceInt(context: Context, identifier: String?): Int? {
         var identifier = identifier
         if (identifier != null && identifier.startsWith("^")) identifier = identifier.substring(1)
@@ -64,14 +68,15 @@ object ResourceUtils {
             identifier = identifier.substring(1)
             if (identifier.contains("/")) {
                 val identifiers = identifier.split("/".toRegex()).toTypedArray()
-                if (identifiers[0].length > 0 && identifiers[1].length > 0) {
+                if (identifiers[0].isNotEmpty() && identifiers[1].isNotEmpty()) {
                     val res = context.resources.getIdentifier(identifiers[1], identifiers[0], context.packageName)
                     return if (res == 0) null else res
                 }
             } else {
                 try {
                     return identifier.toInt()
-                } catch (ignored: NumberFormatException) {
+                } catch (_: NumberFormatException) {
+                    // ignored
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

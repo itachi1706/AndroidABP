@@ -4,22 +4,25 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.itachi1706.abp.attribouter.utils.UrlClickListener
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import com.itachi1706.abp.attribouter.R
-import com.itachi1706.abp.attribouter.utils.*
+import com.itachi1706.abp.attribouter.utils.ResourceUtils
+import com.itachi1706.abp.attribouter.utils.UrlClickListener
+import com.itachi1706.abp.attribouter.utils.equalsProvider
+import com.itachi1706.abp.attribouter.utils.isResourceMutable
+import com.itachi1706.abp.attribouter.utils.loadDrawable
 import com.itachi1706.abp.gitrest.model.ProviderString
 import com.itachi1706.abp.gitrest.model.User
-import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.util.Locale
 
 open class TranslatorWedge(
-        login: String? = null,
-        name: String? = null,
-        avatarUrl: String? = null,
-        locales: String? = null,
-        blog: String? = null,
-        email: String? = null
+    login: String? = null,
+    name: String? = null,
+    avatarUrl: String? = null,
+    locales: String? = null,
+    blog: String? = null,
+    email: String? = null
 ) : Wedge<TranslatorWedge.ViewHolder>(R.layout.attribouter_item_translator) {
 
     var login: String? by attr("login", login)
@@ -65,14 +68,18 @@ open class TranslatorWedge(
         } ?: super.equals(other)
     }
 
-    fun clone() : TranslatorWedge {
+    override fun hashCode(): Int {
+        return if (login == null) super.hashCode() else ProviderString(login!!).hashCode()
+    }
+
+    fun clone(): TranslatorWedge {
         return TranslatorWedge(
-                login,
-                name,
-                avatar,
-                locales,
-                websiteUrl,
-                email
+            login,
+            name,
+            avatar,
+            locales,
+            websiteUrl,
+            email
         ).also {
             it.addChildren(getChildren())
         }

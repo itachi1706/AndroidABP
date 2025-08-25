@@ -23,9 +23,9 @@ public class ClassInstantiator<T> {
         return constructor.newInstance(parameters);
     }
 
-    @Nullable
+    @SuppressWarnings("rawtypes")
     public static ClassInstantiator fromString(String className) throws ClassNotFoundException {
-        return new ClassInstantiator(Class.forName(className));
+        return new ClassInstantiator<>(Class.forName(className));
     }
 
 }

@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import com.itachi1706.abp.attribouter.R
 import com.itachi1706.abp.attribouter.adapters.WedgeAdapter
 import com.itachi1706.abp.attribouter.utils.ResourceUtils
@@ -17,21 +15,23 @@ import com.itachi1706.abp.attribouter.utils.toTitleString
 import com.itachi1706.abp.gitrest.model.License
 import com.itachi1706.abp.gitrest.model.ProviderString
 import com.itachi1706.abp.gitrest.model.Repo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 open class LicenseWedge(
-        repo: String? = null,
-        title: String? = null,
-        description: String? = null,
-        licenseName: String? = null,
-        repoUrl: String? = null,
-        websiteUrl: String? = null,
-        licenseUrl: String? = null,
-        var licensePermissions: Array<String>? = null,
-        var licenseConditions: Array<String>? = null,
-        var licenseLimitations: Array<String>? = null,
-        var licenseDescription: String? = null,
-        licenseBody: String? = null,
-        licenseKey: String? = null
+    repo: String? = null,
+    title: String? = null,
+    description: String? = null,
+    licenseName: String? = null,
+    repoUrl: String? = null,
+    websiteUrl: String? = null,
+    licenseUrl: String? = null,
+    var licensePermissions: Array<String>? = null,
+    var licenseConditions: Array<String>? = null,
+    var licenseLimitations: Array<String>? = null,
+    var licenseDescription: String? = null,
+    licenseBody: String? = null,
+    licenseKey: String? = null
 ) : Wedge<LicenseWedge.ViewHolder>(R.layout.attribouter_item_license) {
 
     var repo: String? by attr("repo", repo)
@@ -72,12 +72,14 @@ open class LicenseWedge(
         (repoUrl ?: repo?.let { ProviderString(it).inferUrl() })?.let { url ->
             repo?.let { repoId ->
                 val id = ProviderString(repoId)
-                addChild(RepoLinkWedge(
+                addChild(
+                    RepoLinkWedge(
                         name = id.provider.toTitleString(),
                         url = url,
                         icon = "@drawable/attribouter_ic_${id.provider}",
                         priority = 0
-                ).create(lifecycle))
+                    ).create(lifecycle)
+                )
             } ?: addChild(RepoLinkWedge(url = url, priority = 1).create(lifecycle))
         }
 
@@ -133,11 +135,15 @@ open class LicenseWedge(
 
     override fun equals(other: Any?): Boolean {
         return (other as? LicenseWedge)?.let {
-            return repo.equalsProvider(other.repo)
+            repo.equalsProvider(other.repo)
                     || repo?.equals(it.title, ignoreCase = true) ?: false
                     || title?.equals(it.repo, ignoreCase = true) ?: false
                     || title?.equals(it.title, ignoreCase = true) ?: false
         } ?: super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return if (repo == null) super.hashCode() else ProviderString(repo!!).hashCode()
     }
 
     override fun getViewHolder(v: View): ViewHolder {

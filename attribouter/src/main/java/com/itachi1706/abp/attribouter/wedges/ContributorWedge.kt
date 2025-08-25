@@ -4,8 +4,6 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import com.itachi1706.abp.attribouter.R
 import com.itachi1706.abp.attribouter.dialogs.UserDialog
 import com.itachi1706.abp.attribouter.utils.ResourceUtils
@@ -14,18 +12,21 @@ import com.itachi1706.abp.attribouter.utils.loadDrawable
 import com.itachi1706.abp.attribouter.utils.toTitleString
 import com.itachi1706.abp.gitrest.model.ProviderString
 import com.itachi1706.abp.gitrest.model.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 open class ContributorWedge(
-        login: String? = null,
-        name: String? = null,
-        avatarUrl: String? = null,
-        profileUrl: String? = null,
-        websiteUrl: String? = null,
-        task: String? = "Contributor",
-        position: Int = 0,
-        bio: String? = null,
-        email: String? = null
-) : Wedge<ContributorWedge.ViewHolder>(R.layout.attribouter_item_contributor), Comparable<ContributorWedge> {
+    login: String? = null,
+    name: String? = null,
+    avatarUrl: String? = null,
+    profileUrl: String? = null,
+    websiteUrl: String? = null,
+    task: String? = "Contributor",
+    position: Int = 0,
+    bio: String? = null,
+    email: String? = null
+) : Wedge<ContributorWedge.ViewHolder>(R.layout.attribouter_item_contributor),
+    Comparable<ContributorWedge> {
 
     var login: String? by attr("login", login)
     var name: String? by attr("name", name)
@@ -34,7 +35,8 @@ open class ContributorWedge(
     var websiteUrl: String? by attr("websiteUrl", websiteUrl)
     var task: String? by attr("task", task)
     var position: Int by object : attr<ContributorWedge, Int>("position", position) {
-        override fun apply(original: Int?, value: Int?): Int? = if (value != null && value != 0) value else original
+        override fun apply(original: Int?, value: Int?): Int? =
+            if (value != null && value != 0) value else original
     }
     var bio: String? by attr("bio", bio)
     var email: String? by attr("email", email)
@@ -59,12 +61,14 @@ open class ContributorWedge(
         (profileUrl ?: login?.let { ProviderString(it).inferUrl() })?.let { url ->
             login?.let { userId ->
                 val id = ProviderString(userId)
-                addChild(ProfileLinkWedge(
+                addChild(
+                    ProfileLinkWedge(
                         name = id.provider.toTitleString(),
                         url = url,
                         icon = "@drawable/attribouter_ic_${id.provider}",
                         priority = 0
-                ).create(lifecycle))
+                    ).create(lifecycle)
+                )
             } ?: addChild(ProfileLinkWedge(url = url, priority = 1).create(lifecycle))
         }
 
@@ -93,6 +97,10 @@ open class ContributorWedge(
         return (other as? ContributorWedge)?.let {
             login.equalsProvider(other.login)
         } ?: super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return if (login == null) super.hashCode() else ProviderString(login!!).hashCode()
     }
 
     override fun compareTo(other: ContributorWedge): Int {
