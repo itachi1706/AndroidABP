@@ -7,8 +7,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-ext.set("version", "0.1.9")
-ext.set("versionCode", 18)
+ext.set("version", "1.0.0")
+ext.set("versionCode", 19)
 
 android {
     compileSdk = 36
