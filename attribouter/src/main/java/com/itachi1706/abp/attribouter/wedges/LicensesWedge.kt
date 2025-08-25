@@ -5,7 +5,7 @@ import com.itachi1706.abp.attribouter.addDefaults
 
 open class LicensesWedge : ListWedge("@string/attribouter_title_licenses", true) {
 
-    var showDefaults: Boolean by attr("showDefaults", true)
+    var showDefaults: Boolean by Attr("showDefaults", true)
 
     override fun onCreate() {
         if (showDefaults)

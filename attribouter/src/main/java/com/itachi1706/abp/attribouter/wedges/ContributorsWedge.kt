@@ -7,8 +7,8 @@ import com.itachi1706.abp.gitrest.model.User
 
 open class ContributorsWedge : ListWedge("@string/attribouter_title_contributors", false) {
 
-    var repo: String? by attr("repo")
-    var showDefaults: Boolean by attr("showDefaults", false)
+    var repo: String? by Attr("repo")
+    var showDefaults: Boolean by Attr("showDefaults", false)
 
     override fun onCreate() {
         if (showDefaults)

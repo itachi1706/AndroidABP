@@ -24,11 +24,11 @@ open class LinkWedge(
     priority: Int = 0
 ) : Wedge<LinkWedge.ViewHolder>(R.layout.attribouter_item_link), Comparable<LinkWedge> {
 
-    var id: String? by attr("id", id)
-    var name: String? by attr("name", name)
-    var url: String? by attr("url", url)
-    var icon: String? by attr("icon", icon)
-    var priority: Int by object : attrInt<LinkWedge>("priority", priority) {
+    var id: String? by Attr("id", id)
+    var name: String? by Attr("name", name)
+    var url: String? by Attr("url", url)
+    var icon: String? by Attr("icon", icon)
+    var priority: Int by object : AttrInt<LinkWedge>("priority", priority) {
         // ignore new "0" values (likely unset)
         override fun apply(original: Int?, value: Int?): Int? = if (value == 0) original else value
     }

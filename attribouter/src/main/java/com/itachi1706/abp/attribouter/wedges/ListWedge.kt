@@ -17,8 +17,8 @@ abstract class ListWedge(
         if (isCardLayout) R.layout.attribouter_item_list_card else R.layout.attribouter_item_list
 ) {
 
-    var title: String by attr("title", defaultTitle)
-    var overflow: Int by attr("overflow", Int.MAX_VALUE)
+    var title: String by Attr("title", defaultTitle)
+    var overflow: Int by Attr("overflow", Int.MAX_VALUE)
 
     val displayItems = ArrayList<Wedge<*>>()
     val itemsAdapter = WedgeAdapter(displayItems)

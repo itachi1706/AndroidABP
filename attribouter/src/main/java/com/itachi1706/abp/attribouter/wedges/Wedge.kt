@@ -13,11 +13,11 @@ import kotlin.reflect.KProperty
 abstract class Wedge<T : Wedge.ViewHolder>(@param:LayoutRes val layoutRes: Int) : Notifiable {
 
     private val children: MutableList<Wedge<*>> = ArrayList()
-    private val attributes: ArrayList<attr<*,*>> = ArrayList()
+    private val attributes: ArrayList<Attr<*,*>> = ArrayList()
     internal var lifecycle: LifecycleInstance? = null
     internal var parent: Notifiable? = null
 
-    open var isHidden by object : attr<Wedge<T>, Boolean>("hidden", false) {
+    open var isHidden by object : Attr<Wedge<T>, Boolean>("hidden", false) {
         override fun apply(original: Boolean?, value: Boolean?): Boolean? = original == true || value == true
     }
 
@@ -66,7 +66,9 @@ abstract class Wedge<T : Wedge.ViewHolder>(@param:LayoutRes val layoutRes: Int) 
         notifyItemChanged()
     }
 
-    open fun onCreate() {}
+    open fun onCreate() {
+        // No-op
+    }
 
     /**
      * Shortcut function for LifecycleInstance
@@ -107,7 +109,7 @@ abstract class Wedge<T : Wedge.ViewHolder>(@param:LayoutRes val layoutRes: Int) 
 
     open class ViewHolder(v: View) : RecyclerView.ViewHolder(v)
 
-    open inner class attr<in R : Wedge<*>, T>(
+    open inner class Attr<in R : Wedge<*>, T>(
             val name: String,
             protected var property: T? = null
     ) {
@@ -138,14 +140,14 @@ abstract class Wedge<T : Wedge.ViewHolder>(@param:LayoutRes val layoutRes: Int) 
 
         @Suppress("UNCHECKED_CAST")
         open fun mergeValue(value: Any?) {
-            (value as? T?).let { setValue(null, null, it) }
+            setValue(null, null, (value as? T?))
         }
     }
 
-    open inner class attrInt<in R: Wedge<*>>(
+    open inner class AttrInt<in R: Wedge<*>>(
             attribute: String,
             property: Int? = null
-    ) : attr<R, Int>(attribute, property) {
+    ) : Attr<R, Int>(attribute, property) {
 
         override fun withProvider(provider: WedgeProvider) {
             provider.getAttribute(this@Wedge, name, property.toString())?.let {

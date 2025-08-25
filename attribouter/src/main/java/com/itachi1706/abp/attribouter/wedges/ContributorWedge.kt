@@ -28,19 +28,19 @@ open class ContributorWedge(
 ) : Wedge<ContributorWedge.ViewHolder>(R.layout.attribouter_item_contributor),
     Comparable<ContributorWedge> {
 
-    var login: String? by attr("login", login)
-    var name: String? by attr("name", name)
-    var avatar: String? by attr("avatar", avatarUrl)
-    var profileUrl: String? by attr("profileUrl", profileUrl)
-    var websiteUrl: String? by attr("websiteUrl", websiteUrl)
-    var task: String? by attr("task", task)
-    var position: Int by object : attr<ContributorWedge, Int>("position", position) {
+    var login: String? by Attr("login", login)
+    var name: String? by Attr("name", name)
+    var avatar: String? by Attr("avatar", avatarUrl)
+    var profileUrl: String? by Attr("profileUrl", profileUrl)
+    var websiteUrl: String? by Attr("websiteUrl", websiteUrl)
+    var task: String? by Attr("task", task)
+    var position: Int by object : Attr<ContributorWedge, Int>("position", position) {
         override fun apply(original: Int?, value: Int?): Int? =
             if (value != null && value != 0) value else original
     }
-    var bio: String? by attr("bio", bio)
-    var email: String? by attr("email", email)
-    override var isHidden: Boolean by attr("hidden", false)
+    var bio: String? by Attr("bio", bio)
+    var email: String? by Attr("email", email)
+    override var isHidden: Boolean by Attr("hidden", false)
 
     override fun onCreate() {
         initChildren()

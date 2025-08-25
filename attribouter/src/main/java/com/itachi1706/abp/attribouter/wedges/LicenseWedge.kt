@@ -34,15 +34,15 @@ open class LicenseWedge(
     licenseKey: String? = null
 ) : Wedge<LicenseWedge.ViewHolder>(R.layout.attribouter_item_license) {
 
-    var repo: String? by attr("repo", repo)
-    var title: String? by attr("title", title)
-    var description: String? by attr("description", description)
-    var licenseName: String? by attr("licenseName", licenseName)
-    var repoUrl: String? by attr("repoUrl", repoUrl)
-    var websiteUrl: String? by attr("websiteUrl", websiteUrl)
-    var licenseUrl: String? by attr("licenseUrl", licenseUrl)
-    var licenseBody: String? by attr("licenseBody", licenseBody)
-    var licenseKey: String? by attr("license", licenseKey)
+    var repo: String? by Attr("repo", repo)
+    var title: String? by Attr("title", title)
+    var description: String? by Attr("description", description)
+    var licenseName: String? by Attr("licenseName", licenseName)
+    var repoUrl: String? by Attr("repoUrl", repoUrl)
+    var websiteUrl: String? by Attr("websiteUrl", websiteUrl)
+    var licenseUrl: String? by Attr("licenseUrl", licenseUrl)
+    var licenseBody: String? by Attr("licenseBody", licenseBody)
+    var licenseKey: String? by Attr("license", licenseKey)
 
     private var token: String? = null
 

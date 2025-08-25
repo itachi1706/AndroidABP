@@ -18,13 +18,13 @@ import com.itachi1706.abp.utils.getThemedColor
 
 open class AppWedge: Wedge<AppWedge.ViewHolder>(R.layout.attribouter_item_app_info) {
 
-    val icon: String? by attr("icon")
-    var title: String? by attr("title")
-    var description: String? by attr("description")
-    val repo: String? by attr("repo")
-    var repoUrl: String? by attr("repoUrl")
-    var websiteUrl: String? by attr("websiteUrl")
-    var playStoreUrl: String? by attr("playStoreUrl")
+    val icon: String? by Attr("icon")
+    var title: String? by Attr("title")
+    var description: String? by Attr("description")
+    val repo: String? by Attr("repo")
+    var repoUrl: String? by Attr("repoUrl")
+    var websiteUrl: String? by Attr("websiteUrl")
+    var playStoreUrl: String? by Attr("playStoreUrl")
 
     override fun onCreate() {
         initChildren()

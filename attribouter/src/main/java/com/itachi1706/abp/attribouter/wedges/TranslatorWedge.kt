@@ -25,12 +25,12 @@ open class TranslatorWedge(
     email: String? = null
 ) : Wedge<TranslatorWedge.ViewHolder>(R.layout.attribouter_item_translator) {
 
-    var login: String? by attr("login", login)
-    var name: String? by attr("name", name)
-    var avatar: String? by attr("avatar", avatarUrl)
-    var websiteUrl: String? by attr("websiteUrl", blog)
-    var locales: String? by attr("locales", locales)
-    var email: String? by attr("email", email)
+    var login: String? by Attr("login", login)
+    var name: String? by Attr("name", name)
+    var avatar: String? by Attr("avatar", avatarUrl)
+    var websiteUrl: String? by Attr("websiteUrl", blog)
+    var locales: String? by Attr("locales", locales)
+    var email: String? by Attr("email", email)
 
     // whether the translator is the first of a locale in the sorted list (i.e. should display its header)
     var isFirst: Boolean = false
@@ -92,7 +92,8 @@ open class TranslatorWedge(
     override fun bind(context: Context, viewHolder: ViewHolder) {
         viewHolder.localeView?.apply {
             text = locales?.split(",")?.getOrNull(0)?.let {
-                Locale(it).getDisplayName(Locale(it))
+                val locale = Locale.Builder().setLanguage(it).build()
+                locale.getDisplayName(locale)
             } ?: ""
             visibility = if (isFirst) View.VISIBLE else View.GONE
         }
